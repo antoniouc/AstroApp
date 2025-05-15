@@ -1,42 +1,36 @@
-import { View, Text, Button, FlatList, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+// src/features/neo/NeoList.tsx
+import React, { useState } from 'react';
+import { View, Text, Button, ScrollView } from 'react-native';
+import { GetAsteroidUseCase } from '../domain/usecases/GetAsteroidUseCases';
+import { useAsteroidViewModel } from '../viewmodel/AsteroidViewModel';
+import { NeoCard } from '../components/CardAsteroid';
+import dayjs from 'dayjs';
+import { AsteroidApiService } from '../data/remote/AsteroidApiService';
+import { AsteroidRepositoryImpl } from '../data/AsteroidRepositoryImpl';
 
-type Product = {
-  idProducto: string;
-  name: string;
-  price: number;
-};
+export const NeoList = () => {
+  const apiService = new AsteroidApiService();
+  const repository = new AsteroidRepositoryImpl(apiService);
+  const useCase = new GetAsteroidUseCase(repository);
+  const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
+  const { asteroids, loading } = useAsteroidViewModel(useCase, date);
 
-const products: Product[] = [
-  { idProducto: "1", name: "Camisa React", price: 299 },
-  { idProducto: "2", name: "Taza Expo", price: 149 },
-  { idProducto: "3", name: "Sticker TypeScript", price: 49 },
-];
-
-
-
-export default function DonkiScreen() {
-  
+  const nextDay = () => setDate(dayjs(date).add(1, 'day').format('YYYY-MM-DD'));
+  const prevDay = () => setDate(dayjs(date).subtract(1, 'day').format('YYYY-MM-DD'));
 
   return (
-  <SafeAreaView>
-      <Text style={{ fontSize: 24, marginBottom: 12 }}>StackDonki</Text>
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.idProducto}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={{
-              padding: 12,
-              borderBottomWidth: 1,
-              borderColor: "#ccc",
-            }}
-          >
-            <Text>{item.name}</Text>
-            <Text>${item.price}</Text>
-          </TouchableOpacity>
-        )}
-      />
-</SafeAreaView>
+    <View style={{ padding: 16 }}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>Fecha: {date}</Text>
+      <Button title="Día anterior" onPress={prevDay} />
+      <Button title="Día siguiente" onPress={nextDay} />
+
+      {loading ? <Text>Cargando...</Text> : (
+        <ScrollView style={{ marginTop: 16 }}>
+          {asteroids.map((asteroid) => (
+            <NeoCard key={asteroid.id} asteroid={asteroid} />
+          ))}
+        </ScrollView>
+      )}
+    </View>
   );
-}
+};
