@@ -7,7 +7,7 @@ export class ApodApiService {
   // reemplaza con tu API key si tienes una
 
   async fetchApod(): Promise<Apod> {
-    const response = await axios.get(`${this.BASE_URL}?api_key=${API_NASA.API_KEY}`);
+    const response = await axios.get(`${API_NASA.BASE_URL}${API_NASA.BASE_URL_APOD}?api_key=${API_NASA.API_KEY}`);
     return response.data;
   }
 }
