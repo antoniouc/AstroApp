@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import StackLayout from "./StackNavigator";
+import { MarsGallery } from "../screens/Marsgallery";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -36,8 +37,8 @@ export default function DrawerLayout() {
                     <Ionicons name="planet" color={color} size={22}/>
                 )
             }} name="about" component={StackLayout} />
+            <Drawer.Screen name="config" component={MarsGallery} />
           {/* 
-            <Drawer.Screen name="config" component={ProfileScreen} />
             <Drawer.Screen name="news" component={HelpScreen} />
          */}
       </Drawer.Navigator>
