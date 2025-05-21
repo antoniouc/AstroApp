@@ -8,7 +8,7 @@ interface MarsSearchProps {
 
 export const MarsSearch = ({ onSearch }: MarsSearchProps) => {
   const [rover, setRover] = useState('curiosity');
-  const [date, setDate] = useState('2021-01-01');
+  const [date, setDate] = useState('2012-08-06');
   const [camera, setCamera] = useState('');
 
   const roverMissionDates: Record<string, { start: string; end: string }> = {

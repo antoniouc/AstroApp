@@ -5,4 +5,5 @@ BASE_URL_ASTEROID: "/neo/rest/v1/neo/browse",
 BASE_URL_APOD: "/planetary/apod",
 BASE_URL_EARTH: "https://api.nasa.gov/planetary/earth/assets",
 BASE_URL_MARS: "/mars-photos/api/v1/rovers/${rover}/photos",
+BASE_URL_NASA_LIBRARY: "/search",
 }
