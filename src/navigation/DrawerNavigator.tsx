@@ -7,6 +7,7 @@ import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import StackLayout from "./StackNavigator";
 import { MarsGallery } from "../screens/Marsgallery";
+import { NasaLibraryScreen } from "../features/NasaLibrary/Screens/NasaLibraryScreen";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -38,9 +39,9 @@ export default function DrawerLayout() {
                 )
             }} name="about" component={StackLayout} />
             <Drawer.Screen name="config" component={MarsGallery} />
-          {/* 
-            <Drawer.Screen name="news" component={HelpScreen} />
-         */}
+          
+            <Drawer.Screen name="news" component={NasaLibraryScreen} />
+         
       </Drawer.Navigator>
     </SafeAreaView>
   );
