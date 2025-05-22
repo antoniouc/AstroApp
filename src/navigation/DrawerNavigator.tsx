@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import StackLayout from "./StackNavigator";
 import { MarsGallery } from "../screens/Marsgallery";
 import { NasaLibraryScreen } from "../features/NasaLibrary/Screens/NasaLibraryScreen";
+import NasaLibraryStack from "./NasaLibraryStack";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -32,15 +33,21 @@ export default function DrawerLayout() {
           name="Home"
           component={TabLayout}
           />
-            <Drawer.Screen options={{
-                title: "donki",
+
+            <Drawer.Screen  options={{
+                title: "Rover Photos",
                 drawerIcon: ({color, size}) => (
-                    <Ionicons name="planet" color={color} size={22}/>
+                    <Ionicons name="logo-reddit" color={color} size={22}/>
                 )
-            }} name="about" component={StackLayout} />
-            <Drawer.Screen name="config" component={MarsGallery} />
+            }} name="rover" component={MarsGallery} />
           
-            <Drawer.Screen name="news" component={NasaLibraryScreen} />
+            <Drawer.Screen
+            options={{
+                title: "Nasa Library",
+                drawerIcon: ({color, size}) => (
+                    <Ionicons name="library" color={color} size={22}/>
+                )}}
+             name="NasaLibrary" component={NasaLibraryStack} />
          
       </Drawer.Navigator>
     </SafeAreaView>
