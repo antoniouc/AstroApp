@@ -1,20 +1,26 @@
 // src/features/neo/NeoList.tsx
-import React, { useState } from 'react';
-import { View, Text, Button, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button, ScrollView, } from 'react-native';
 import { GetAsteroidUseCase } from '../domain/usecases/GetAsteroidUseCases';
-import { useAsteroidViewModel } from '../viewmodel/AsteroidViewModel';
+import { useAsteroidViewModel, asteroidObservable } from '../viewmodel/AsteroidViewModel';
 import { NeoCard } from '../components/CardAsteroid';
 import dayjs from 'dayjs';
 import { AsteroidApiService } from '../data/remote/AsteroidApiService';
 import { AsteroidRepositoryImpl } from '../data/AsteroidRepositoryImpl';
+import { Asteroid } from '../domain/entities/Asteroid';
 
 export const NeoList = () => {
   const apiService = new AsteroidApiService();
   const repository = new AsteroidRepositoryImpl(apiService);
   const useCase = new GetAsteroidUseCase(repository);
   const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
-  const { asteroids, loading } = useAsteroidViewModel(useCase, date);
-
+  const {  loading } = useAsteroidViewModel(useCase, date);
+  const [asteroids, setAsteroids] = useState<Asteroid[]>([]);
+    useEffect(() => {
+    const listener = (data: Asteroid[]) => setAsteroids(data);
+    asteroidObservable.subscribe(listener);
+    return () => asteroidObservable.unsubscribe(listener);
+  }, []);
   const nextDay = () => setDate(dayjs(date).add(1, 'day').format('YYYY-MM-DD'));
   const prevDay = () => setDate(dayjs(date).subtract(1, 'day').format('YYYY-MM-DD'));
 
