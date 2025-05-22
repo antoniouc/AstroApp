@@ -3,14 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import DrawerLayout from './src/navigation/DrawerNavigator';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { Provider } from 'react-redux';
+import { store } from './src/store/indexStore';
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <DrawerLayout></DrawerLayout>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <DrawerLayout></DrawerLayout>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 

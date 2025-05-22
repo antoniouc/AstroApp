@@ -5,8 +5,8 @@
 export type DrawerParamList = {
     Home: undefined,       // Pantalla principal
     about: undefined,     // Pantalla de información
-    news: undefined,      // Pantalla de noticias
-    config: undefined     // Pantalla de configuración
+    NasaLibrary: undefined,      // Pantalla de noticias
+    rover: undefined     // Pantalla de configuración
 }
 
 // Define los parámetros de las rutas del Tab Navigator (navegación por pestañas)
@@ -24,6 +24,11 @@ export type StacksParamList = {
     detailApod: { id: string },    // Pantalla de detalle APOD requiere ID
     datailRover: { id: string },   // Pantalla de detalle Rover (posible typo en 'datail')
     detailNear: { id: string },    // Pantalla de detalle de objetos cercanos
-    NasaImage: undefined,          // Pantalla de imágenes NASA sin parámetros
+    favoritos: undefined,          // Pantalla de imágenes NASA sin parámetros
     donki: undefined               // Pantalla DONKI (Space Weather Database) sin parámetros
+}
+
+export type NasaLibraryStackParamList = {
+    NasaGallery: undefined; // Pantalla de galería de NASA
+    FavoritesNasa: undefined; // Pantalla de favoritos de NASA
 }

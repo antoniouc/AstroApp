@@ -82,7 +82,7 @@ const EarthAssetScreen = () => {
       <Button title="Buscar imagen satelital" onPress={handleSubmit(onSubmit)} />
 
       {asset && (
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop:  10}}>
           <Image source={{ uri: asset.url }} style={{ width: 300, height: 300 }} />
           <Text>📍 {asset.lat}, {asset.lon}</Text>
           <Text>📅 {asset.date}</Text>
