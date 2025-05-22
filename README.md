@@ -1,58 +1,105 @@
-# AstroApp
-Proyecto de consumo de APIs con React Native, enfocado en integrar y visualizar información científica proporcionada por la NASA. Incluye manejo de estados, navegación, diseño responsivo y buenas prácticas de desarrollo móvil, cómo son patrones de diseño, principios SOLID y patrones de arquitectura.
+# 🚀 AstroApp
 
-# Navegacion 
-📱 Estructura  de la app
-🔻 Drawer Navigation:
-Inicio (pantalla principal con Tabs)
+**AstroApp** es una aplicación móvil desarrollada en **React Native + TypeScript** que permite explorar recursos visuales de la NASA a través de diferentes APIs oficiales. La aplicación cuenta con funcionalidades como búsqueda multimedia, galería de imágenes del Mars Rover, y sistema de favoritos, todo construido bajo principios de **Clean Architecture** y **patrones de diseño modernos**.
 
-Acerca de la App
+---
 
-Configuración
+## 🧠 Tecnologías
 
-📑 Dentro de Inicio (Tabs):
-🪐 Tab 1: APOD (Astronomy Picture of the Day)
-Muestra la imagen del día con su título y descripción.
+- **React Native (Expo)**
+- **TypeScript**
+- **Redux Toolkit** para manejo de estado global
+- **React Navigation (Drawer, Stack, Tabs)**
+- **AsyncStorage** para persistencia local
+- **React Hook Form + Yup** para validación de formularios
+- **Reanimated** para animaciones fluidas
+- **Axios** para consumo de APIs
 
-Usa la API: https://api.nasa.gov/planetary/apod
+---
 
-🚀 Tab 2: Mars Rover Photos
-Muestra imágenes tomadas por los rovers en Marte.
+## 🛰️ Funcionalidades
 
-Puedes filtrar por rover, fecha, o cámara.
+- 🔍 **Búsqueda de imágenes y videos** desde la NASA Image & Video Library.
+- 📸 **Galería de fotos del Rover de Marte**.
+- ❤️ **Favoritos persistentes** en almacenamiento local.
+- 🔐 Interfaz intuitiva con navegación por Drawer, Tabs y Stacks.
+- 🎨 Animaciones suaves y responsivas.
 
-Usa la API: https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos
+---
 
-☄️ Tab 3: Near Earth Objects (Asteroides cercanos)
-Lista los objetos que pasarán cerca de la Tierra entre fechas.
+## 🏗️ Arquitectura
 
-Usa la API: https://api.nasa.gov/neo/rest/v1/feed
+### 🧱 Clean Architecture + MVVM
 
-🧭 Pantalla extra con navegación interna (Stacks):
-En cada tab puedes tener un stack si quieres mostrar una pantalla de detalle:
+- **Domain**: Entidades y contratos (interfaces).
+- **Data**: Repositorios, DTOs y servicios de API.
+- **Presentation**: ViewModels, Hooks y UI.
 
-Detalles del APOD
+### 💡 Principios SOLID aplicados
 
-Detalles de una foto del rover
+- **S**: Cada módulo tiene una responsabilidad única (ej. `NasaLibraryRepositoryImpl.ts` solo accede a datos).
+- **O**: Puedes extender sin modificar, por ejemplo, cambiando la API o agregando filtros.
+- **L**: Los ViewModels no dependen de implementaciones concretas, sino de interfaces.
+- **I**: Interfaces separadas por contexto (ej. `NasaLibraryRepository`).
+- **D**: Las capas dependen de abstracciones, no implementaciones directas.
 
-Info extendida de un asteroide
+### 🧩 Patrones de diseño usados
 
-Otras secciones:
-🌌 En un Stack extra (puede ser accedido desde un botón en Configuración o Inicio):
-📸 NASA Image & Video Library
-Permite hacer búsquedas por palabra clave (ej. "moon", "earth").
+| Patrón         | Aplicación                                                                 |
+|----------------|----------------------------------------------------------------------------|
+| **Repositorio** | `NasaLibraryRepository` y su implementación en `data/repositories`         |
+| **MVVM**        | Separación clara entre lógica (ViewModel), UI y entidades de dominio      |
+| **Singleton**   | Redux Store y `ApiService` para manejar una sola instancia compartida     |
 
-Usa la API: https://images-api.nasa.gov/search
+---
 
-🌠 DONKI (Space Weather Notifications)
-Lista eventos espaciales como tormentas solares o CMEs.
+##🔌 APIs Usadas:
 
-Usa la API: https://api.nasa.gov/DONKI/notifications
+📚 NASA Image & Video Library API
 
-✅ Resumen: Con esta estructura:
+Endpoint: https://images-api.nasa.gov/search
 
-3 APIs están directamente en los tabs (APOD, Mars Rover, NEO).
+Permite buscar imágenes, videos y audios relacionados con el espacio utilizando palabras clave.
 
-2 APIs están disponibles en otras pantallas o dentro del stack (NASA Library, DONKI).
+🤖 Mars Rover Photos API
 
-Todas las 5 APIs están siendo utilizadas de forma clara y accesible en la app.
+Endpoint: https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos
+
+Devuelve fotografías capturadas por los rovers de Marte (Curiosity, Opportunity, Spirit) según fecha y cámara.
+
+🌍 Earth Assets API
+
+Endpoint: https://api.nasa.gov/planetary/earth/assets
+
+Permite acceder a imágenes satelitales de la Tierra por coordenadas geográficas y fechas.
+
+🌠 Astronomy Picture of the Day (APOD) API
+
+Endpoint: https://api.nasa.gov/planetary/apod
+
+Proporciona la imagen astronómica destacada del día, junto con su explicación.
+
+☄️ Asteroids NeoWs API
+
+Endpoint: https://api.nasa.gov/neo/rest/v1/neo/browse
+
+Devuelve una lista de asteroides cercanos a la Tierra con información como fecha de aproximación, tamaño y velocidad.
+
+
+---
+
+## 🚀 Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/antoniouc/AstroApp.git
+cd AstroApp
+npm install
+npx expo start
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT. ¡Úsalo como inspiración para tus propias misiones espaciales! 🛸 
+
+🙌 Autor
+Desarrollado por @antoniouc
